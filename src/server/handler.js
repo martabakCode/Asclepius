@@ -4,27 +4,37 @@ const storeData = require('../services/storeData');
 const getData = require('../services/getData');
 
 const postPredictHandler = async (request, h) => {
-  const { image } = request.payload;
-  const { model } = request.server.app;
-  const { predictionLabel, confidenceScore, suggestion } = await predictClassification(image, model);
-  
-  const id = crypto.randomUUID();
-  const createdAt = new Date().toISOString();
+  try {
+    const { image } = request.payload; // Pastikan ini adalah buffer gambar
+    const { model } = request.server.app;
 
-  const data = {
-    id: id,
-    result: predictionLabel,
-    suggestion: suggestion,
-    createdAt: createdAt,
-  };
+    const { predictionLabel, confidenceScore, suggestion } = await predictClassification(image, model);
+    
+    const id = crypto.randomUUID();
+    const createdAt = new Date().toISOString();
 
-  await storeData(id, data);
+    const data = {
+      id: id,
+      result: predictionLabel,
+      suggestion: suggestion,
+      createdAt: createdAt,
+    };
 
-  return h.response({
-    status: 'success',
-    message: 'Model is predicted successfully',
-    data,
-  }).code(201);
+    // Simpan data jika diperlukan
+    // await storeData(id, data);
+
+    return h.response({
+      status: 'success',
+      message: 'Model is predicted successfully',
+      data,
+    }).code(201);
+  } catch (error) {
+    console.error('Error during prediction:', error);
+    return h.response({
+      status: 'fail',
+      message: 'An error occurred while processing the prediction',
+    }).code(500);
+  }
 };
 
 const getPredictHistoriesHandler = async (request, h) => {

@@ -3,12 +3,14 @@ const InputError = require('../exceptions/InputError');
 
 const predictClassification = async (image, model) => {
   try {
+    console.log('image', image)
+    console.log('model', model)
     const tensor = tf.node
       .decodeImage(image)
       .resizeNearestNeighbor([224, 224])
       .expandDims()
       .toFloat();
-
+  console.log('tensor', tensor)
     const prediction = model.predict(tensor);
     const score = await prediction.data();
     const confidenceScore = Math.max(...score) * 100;
