@@ -23,11 +23,11 @@ const predictClassification = async (image, model) => {
     let suggestion;
 
     if (predictionLabel === 'Non-cancer') {
-      suggestion = 'You are healthy';
+      suggestion = 'Penyakit kanker tidak terdeteksi.';
     }
 
     if (predictionLabel === 'Cancer') {
-      suggestion = 'Please consult to the doctor immediately!';
+      suggestion = 'Segera periksa ke dokter!';
     }
 
     return {

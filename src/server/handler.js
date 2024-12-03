@@ -32,8 +32,8 @@ const postPredictHandler = async (request, h) => {
     console.error('Error during prediction:', error);
     return h.response({
       status: 'fail',
-      message: 'An error occurred while processing the prediction',
-    }).code(500);
+      message: 'Terjadi kesalahan dalam melakukan prediksi',
+    }).code(400);
   }
 };
 

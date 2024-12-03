@@ -1,0 +1,6 @@
+{
+ "backend-service-url": "http://34.128.67.138:3000/",
+ "frontend-service-url": "https://submissionmlgc-rajendra.et.r.appspot.com/",
+ "project-id": "submissionmlgc-rajendra",
+ "bucket-name": " dicoding-submissionmlgc-rajendra"
+}
