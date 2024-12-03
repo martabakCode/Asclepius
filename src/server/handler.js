@@ -6,8 +6,7 @@ const getData = require('../services/getData');
 const postPredictHandler = async (request, h) => {
   const { image } = request.payload;
   const { model } = request.server.app;
-  console.log(image);
-  const { predictionLabel, suggestion } = await predictClassification(image, model);
+  const { predictionLabel, confidenceScore, suggestion } = await predictClassification(image, model);
   
   const id = crypto.randomUUID();
   const createdAt = new Date().toISOString();
